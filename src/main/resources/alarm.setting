@@ -1,0 +1,40 @@
+##############################
+# lg-alarm v1.0.0版本 配置文件
+# 修改该文件必须重启服务，否则不生效
+##############################
+
+##全局参数设置
+# sender: 发送器，可以配置微信发送(wechat)和邮箱发送(email)，以逗号隔开
+sender = wechat,email
+# 消息队列最大长度,默认100
+message.queue.size = 100
+
+## 邮件发送相关配置
+# 邮箱登录用户名
+[email]
+username=
+
+# 邮箱登录密码
+password=
+
+# SMTP服务器
+hostname=smtp.sina.com
+
+# SMTP端口
+port=25
+
+charset=utf-8
+
+# 是否启用ssl
+ssl=false
+ssl.port=443
+
+## 微信相关配置
+# 企业号的企业id
+[wechat]
+corpid=
+# 报警应用的密钥
+corpsecret=
+# 企业应用的id，整型。可在应用的设置页面查看
+agentid=1000002
+#partyid=
