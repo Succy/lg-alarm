@@ -1,5 +1,6 @@
 package cn.succy.alarm.sender.impl;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.setting.Setting;
 import cn.succy.alarm.model.Contact;
@@ -57,7 +58,7 @@ public class EmailSenderImpl implements Sender {
             email.setSslSmtpPort(emailSetting.getStr(Constants.Email.SSL_POEMAIL_PORT));
         }
         Set<String> emailSet = recvMap.get(appName).stream().map(Contact::getEmail).collect(Collectors.toSet());
-
+        CollUtil.removeBlank(emailSet);
         try {
             email.setFrom(emailSetting.getStr(Constants.Email.USERNAME), model.getAlarmName());
             for (String to : emailSet) {

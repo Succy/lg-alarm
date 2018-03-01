@@ -25,7 +25,7 @@ public class AlarmMqConsumerStarter extends Thread {
             }catch (Exception e) {
                 // 该出捕获异常是因为：当邮件发送失败时会抛出异常，如果不捕获，这里将跳出循环
                 // 队列中其他等待发送的消息就不会继续发送了。
-                logger.warn(e.getMessage());
+                logger.warn(e.getMessage(), e);
             }
         }
     }

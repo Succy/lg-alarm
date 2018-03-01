@@ -44,7 +44,7 @@ public class WeChatSenderImpl implements Sender {
 
         List<Contact> contacts = recvMap.get(modelAppName);
         Set<String> weChatSet = contacts.stream().map(Contact::getWxId).collect(Collectors.toSet());
-
+        CollUtil.removeBlank(weChatSet);
         String touser = CollUtil.join(weChatSet, "|");
 
         TextMessage message = new TextMessage();
