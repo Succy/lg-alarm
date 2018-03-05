@@ -19,11 +19,11 @@
             <artifactId>blade-mvc</artifactId>
             <version>${blade-mvc.version}</version>
         </dependency>
-        <dependency>
-            <groupId>cn.hutool</groupId>
-            <artifactId>hutool-json</artifactId>
-            <version>${hutool.version}</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>cn.hutool</groupId>-->
+            <!--<artifactId>hutool-json</artifactId>-->
+            <!--<version>${hutool.version}</version>-->
+        <!--</dependency>-->
         <dependency>
             <groupId>cn.hutool</groupId>
             <artifactId>hutool-http</artifactId>
@@ -46,6 +46,13 @@
             <artifactId>enjoy</artifactId>
             <version>3.3</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/com.alibaba/fastjson -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.46</version>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>

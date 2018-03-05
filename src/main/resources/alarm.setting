@@ -5,7 +5,7 @@
 
 ##全局参数设置
 # sender: 发送器，可以配置微信发送(wechat)和邮箱发送(email)，以逗号隔开
-sender = wechat,email
+sender = wechat
 # 消息队列最大长度,默认100
 message.queue.size = 100
 

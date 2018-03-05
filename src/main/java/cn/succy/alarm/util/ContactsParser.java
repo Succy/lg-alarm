@@ -4,12 +4,13 @@ import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.io.watch.SimpleWatcher;
 import cn.hutool.core.io.watch.WatchMonitor;
+import cn.hutool.core.io.watch.watchers.DelayWatcher;
 import cn.hutool.core.util.CharsetUtil;
-import cn.hutool.json.JSONObject;
-import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 import cn.succy.alarm.model.Contact;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 
 import java.io.File;
 import java.nio.file.Path;
@@ -43,26 +44,27 @@ public class ContactsParser {
     private static Map<String, List<Contact>> load() {
         logger.debug("load contacts json file");
         File jsonFile = FileUtil.file(CONTACTS_FILE_PATH);
-        WatchMonitor.createAll(jsonFile, new SimpleWatcher() {
+        // 使用延迟处理监听事件，避免多次触发modify事件
+        WatchMonitor.createAll(jsonFile, new DelayWatcher(new SimpleWatcher() {
             @Override
             public void onModify(WatchEvent<?> event, Path currentPath) {
                 logger.debug("{} has been modified, reload it", jsonFile.getName());
                 loadFromJson();
                 logger.debug("recv map => {}", recvMap);
             }
-        }).start();
+        }, 500)).start();
 
         if (recvMap == null || recvMap.size() <= 0) {
             loadFromJson();
         }
 
         return recvMap;
-
     }
 
     @SuppressWarnings("unchecked")
     private static void loadFromJson() {
-        JSONObject root = JSONUtil.readJSONObject(FileUtil.file(CONTACTS_FILE_PATH), CharsetUtil.CHARSET_UTF_8);
+       // JSONObject
+        JSONObject root = JSON.parseObject(FileUtil.readString(FileUtil.file(CONTACTS_FILE_PATH), CharsetUtil.CHARSET_UTF_8));
         JSONObject prodLinesJson = root.getJSONObject(KEY_PROD_LINES);
         JSONObject contactsJson = root.getJSONObject(KEY_CONTACTS);
         // 清空Map，防止出现意外情况
@@ -72,7 +74,7 @@ public class ContactsParser {
             List<String> values = CollUtil.distinct((List<String>) entry.getValue());
             List<Contact> contacts = new ArrayList<>();
             for (String value : values) {
-                Contact contact = contactsJson.getBean(value, Contact.class);
+                Contact contact = contactsJson.getObject(value, Contact.class);
                 if (contact != null) {
                     contacts.add(contact);
                 }

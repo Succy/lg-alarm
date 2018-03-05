@@ -19,7 +19,7 @@ public class SendEmailTest {
         Map<String, Object> param = new HashMap<>();
         param.put("level", "deBug");
         param.put("modelName", "lg");
-        param.put("content", "联系人热加载测试");
+        param.put("content", "测试下哈哈哈");
         String result = HttpUtil.post("http://172.16.2.157:9000/alarm/send", param);
 //        String result = HttpUtil.post("http://127.0.0.1:9000/alarm/send", param);
         System.out.println(result);
