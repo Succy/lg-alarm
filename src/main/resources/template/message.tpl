@@ -6,6 +6,6 @@
 告警名称: #(alarmName)
 告警模块: #(AlarmUtil.getModelName(appName))
 警报级别: #(level)
-主机IP: #(AlarmUtil.getHost(host))
+### 主机IP: #(AlarmUtil.getHost(host))
 告警时间: #(dateTime)
 警报内容: #(content)

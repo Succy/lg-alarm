@@ -32,7 +32,8 @@ public class AlarmController {
     @JSON
     public Result sendAlarm(@Param ParamModel model, Request request) {
         Result result = new Result();
-        String modelName = model.getModelName();
+        // 获取模块名称，并且忽略大小写
+        String modelName = model.getModelName().toLowerCase();
 
         // 找不到对应的modelName情况
         if (StrUtil.isBlank(AlarmUtil.getModelName(modelName))) {
@@ -42,12 +43,12 @@ public class AlarmController {
         }
 
         // 找不到对应level情况
-        Level level = AlarmUtil.getLevel(model.getLevel());
-        if (level == null) {
-            result.setCode(-2);
-            result.setMsg(String.format("警报发送失败！原因：无效警报级别level=%s,请正确填写(error|info|warn|debug)其中一个。", model.getLevel()));
-            return result;
-        }
+//        Level level = AlarmUtil.getLevel(model.getLevel());
+//        if (level == null) {
+//            result.setCode(-2);
+//            result.setMsg(String.format("警报发送失败！原因：无效警报级别level=%s,请正确填写(error|info|warn|debug)其中一个。", model.getLevel()));
+//            return result;
+//        }
 
         // 模块对应联系人未配置情况
         Map<String, List<Contact>> recvMap = ContactsParser.getRecvMap();
@@ -61,8 +62,8 @@ public class AlarmController {
         TemplateModel templateModel = new TemplateModel();
         String remoteAddress = request.host();
         templateModel.setHost(remoteAddress);
-        templateModel.setLevel(level);
-        templateModel.setAlarmName(Constants.ALARM_SYS_NAME);
+        templateModel.setLevel(model.getLevel());
+        templateModel.setAlarmName(model.getAlarmName());
         templateModel.setContent(model.getContent());
         templateModel.setAppName(modelName);
         templateModel.setDateTime(DateTime.now().toString());

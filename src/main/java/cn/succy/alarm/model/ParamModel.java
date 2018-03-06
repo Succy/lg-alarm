@@ -6,8 +6,17 @@ package cn.succy.alarm.model;
 public class ParamModel {
 
     private String modelName;
+    private String alarmName;
     private String level;
     private String content;
+
+    public String getAlarmName() {
+        return alarmName;
+    }
+
+    public void setAlarmName(String alarmName) {
+        this.alarmName = alarmName;
+    }
 
     public String getModelName() {
         return modelName;

@@ -52,7 +52,7 @@ public class Alarm {
      * @param content   警报内容
      */
     public static void info(String modelName, String content, Throwable e) {
-        send(Level.INFO, modelName, content, e);
+        send("info", modelName, content, e);
     }
 
     public static void debug(String modelName, String content) {
@@ -66,7 +66,7 @@ public class Alarm {
      * @param content   警报内容
      */
     public static void debug(String modelName, String content, Throwable e) {
-        send(Level.DEBUG, modelName, content, e);
+        send("debug", modelName, content, e);
     }
 
     public static void warn(String modelName, String content) {
@@ -80,7 +80,7 @@ public class Alarm {
      * @param content   警报内容
      */
     public static void warn(String modelName, String content, Throwable e) {
-        send(Level.WARN, modelName, content, e);
+        send("warn", modelName, content, e);
     }
 
     public static void error(String modelName, String content) {
@@ -94,10 +94,10 @@ public class Alarm {
      * @param content   警报内容
      */
     public static void error(String modelName, String content, Throwable e) {
-        send(Level.ERROR, modelName, content, e);
+        send("error", modelName, content, e);
     }
 
-    private static void send(Level level, String modelName, String content, Throwable e) {
+    private static void send(String level, String modelName, String content, Throwable e) {
         TemplateModel model = new TemplateModel();
         model.setAlarmName(Constants.ALARM_SYS_NAME);
         model.setAppName(modelName);

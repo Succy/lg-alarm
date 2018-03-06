@@ -29,7 +29,7 @@ public class TemplateModel implements Serializable {
     /**
      * 警报级别
      */
-    private Level level;
+    private String level;
     /**
      * 告警的主机
      */
@@ -51,13 +51,7 @@ public class TemplateModel implements Serializable {
      */
     private String exception;
 
-    public TemplateModel(String alarmName, Level level, String host, String dateTime, String content) {
-        this.alarmName = alarmName;
-        this.level = level;
-        this.host = host;
-        this.dateTime = dateTime;
-        this.content = content;
-    }
+
 
     public TemplateModel() {
     }
@@ -78,11 +72,11 @@ public class TemplateModel implements Serializable {
         this.appName = appName;
     }
 
-    public Level getLevel() {
+    public String  getLevel() {
         return level;
     }
 
-    public void setLevel(Level level) {
+    public void setLevel(String  level) {
         this.level = level;
     }
 
